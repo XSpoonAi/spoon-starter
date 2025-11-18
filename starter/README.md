@@ -45,7 +45,7 @@ pip install -r requirements.txt
 
 ```bash
 pip install -e .
-
+```
 ---
 ### Configure an OpenRouter (or other OpenAI-compatible) API key**  
    Put the key into `.env`:
@@ -66,16 +66,8 @@ The script asks three generic topics in sequence. Each round prints:
 
 ---
 
-### 3. Customization
-| Need | Where to change |
-| Change model/provider | `ChatBot(...)` inside `create_chatbot()` |
-| Customize questions | `Question` list at the top |
-| Tweak output format | Printing logic in `stream_chatbot_response()` |
-| Integrate with your app | Reuse `stream_chatbot_response()` or call the `ChatBot.astream()` generator directly |
 
----
-
-### 4. Tips
+### 3. Tips
 - **`Cleanup failed for ...`** – means a provider isn’t configured; remove it from `config.json` if unused.
 - **`websockets.legacy` DeprecationWarning** – upstream warning, safe to ignore.
 
