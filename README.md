@@ -58,7 +58,7 @@ pip install -e .
 
 ### 2. Run the Demo
 ```bash
-python spoon-starter/starter/streaming_chatbot.py
+python spoon-starter/streaming_chatbot.py
 ```
 The script asks three generic topics in sequence. Each round prints:
 
