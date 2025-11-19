@@ -33,7 +33,7 @@ async def main():
     print(" Streaming ChatBot Demo")
     print("=" * 50)
 
-    for qustion in Questions:
+    for question in Questions:
         print("\n" + "=" * 50)
         print(f"Q: {question}")
         print("=" * 50)

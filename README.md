@@ -14,22 +14,32 @@
 
 ```bash
 git clone https://github.com/XSpoonAi/spoon-core.git
-cd spoon-core
+
 git clone https://github.com/XSpoonAi/spoon-toolkit.git
-cd spoon-toolkit
+
 ```
 
 ### 2. Create Virtual Environment
 
 ```bash
 # macOS/Linux
-python3 -m venv spoon-env
-source spoon-env/bin/activate
+uv venv .venv
+
+source .venv/bin/activate
+
+uv pip install -r requirements.txt
+```
 
 # Windows (PowerShell)
-python -m venv spoon-env
-.\spoon-env\Scripts\Activate.ps1
+```bash
+uv venv .venv
+
+.\.venv\Scripts\Activate.ps1
+
+uv pip install -r requirements.txt
 ```
+
+
 
 > 💡 On newer Apple Silicon Macs the `python` shim may not point to Python 3.
 > Use `python3` for all commands unless you have explicitly configured `python`
@@ -44,6 +54,9 @@ pip install -r requirements.txt
 ### 4. Install as Package (Optional)
 
 ```bash
+cd spoon-core
+pip install -e .
+cd spoon-toolkit
 pip install -e .
 ```
 ---
@@ -52,7 +65,7 @@ pip install -e .
    ```
    OPENROUTER_API_KEY=sk-xxxx
    ```
-   You can adjust the `llm_provider` and `model_name` in `streaming_agent.py`’s `ChatBot(...)`.
+   You can adjust the `llm_provider` and `model_name` in `streaming_chatbot.py`’s `ChatBot(...)`.
 
 ---
 
@@ -62,7 +75,7 @@ python spoon-starter/streaming_chatbot.py
 ```
 The script asks three generic topics in sequence. Each round prints:
 
-- ` Streaming ChatBot response...` – LLM tokens stream in real time.
+LLM tokens stream in real time.
 
 ---
 
