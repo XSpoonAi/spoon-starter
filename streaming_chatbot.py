@@ -17,10 +17,7 @@ Questions = [
 ]
 
 def create_chatbot() -> ChatBot:
-    return ChatBot(
-        llm_provider="openrouter",
-        model_name="anthropic/claude-3.5-sonnet",
-    )
+    return ChatBot()
 
 async def stream_chatbot_response(question: str, timeout: float = 60.0) -> None:
     chatbot = create_chatbot()
