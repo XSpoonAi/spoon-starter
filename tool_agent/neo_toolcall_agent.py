@@ -5,7 +5,6 @@ Reusable Neo ToolCallAgent factory.
 from typing import List
 
 from dotenv import load_dotenv
-from pydantic import Field
 
 from spoon_ai.agents.toolcall import ToolCallAgent
 from spoon_ai.chat import ChatBot
@@ -59,19 +58,18 @@ def create_blockchain_agent(
 
     tools = _default_toolkit()
     prompt_text = _build_system_prompt(description, network, limit, skip)
+    tool_manager = ToolManager(tools)
 
     class NeoBlockchainAgent(ToolCallAgent):
         agent_name: str = "Blockchain Explorer"
         agent_description: str = description
         system_prompt: str = prompt_text
         max_steps: int = 5
-        avaliable_tools: ToolManager = Field(
-            default_factory=lambda: ToolManager(tools)
-        )
 
     return NeoBlockchainAgent(
         llm=ChatBot(
             llm_provider="openrouter",
             model_name="openai/gpt-5.1",
-        )
+        ),
+        available_tools=tool_manager
     )
