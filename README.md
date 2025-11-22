@@ -23,21 +23,21 @@ git clone https://github.com/XSpoonAi/spoon-toolkit.git
 
 ```bash
 # macOS/Linux
-uv venv .venv
+python -m venv spoon
 
-source .venv/bin/activate
+source spoon/bin/activate
 
-uv pip install -r requirements.txt
+
 ```
 
 # Windows (PowerShell)
 
 ```bash
-uv venv .venv
+python -m venv spoon
 
-.\.venv\Scripts\Activate.ps1
+.\spoon\Scripts\Activate.ps1
 
-uv pip install -r requirements.txt
+
 ```
 
 > 💡 On newer Apple Silicon Macs the `python` shim may not point to Python 3.
