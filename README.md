@@ -23,15 +23,12 @@ git clone https://github.com/XSpoonAi/spoon-toolkit.git
 
 ```bash
 # macOS/Linux
+
 python -m venv spoon
 
 source spoon/bin/activate
 
-
-
-
 # Windows (PowerShell)
-
 
 python -m venv spoon
 
