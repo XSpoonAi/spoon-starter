@@ -28,11 +28,11 @@ python -m venv spoon
 source spoon/bin/activate
 
 
-```
+
 
 # Windows (PowerShell)
 
-```bash
+
 python -m venv spoon
 
 .\spoon\Scripts\Activate.ps1
