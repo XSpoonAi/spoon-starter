@@ -18,7 +18,7 @@ git clone https://github.com/XSpoonAi/spoon-core.git
 git clone https://github.com/XSpoonAi/spoon-toolkit.git
 
 By the end, your project layout will look like this:
-```text
+
 spoon/
 ├── spoon-core
 ├── spoon-starter
