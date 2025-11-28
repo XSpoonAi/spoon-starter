@@ -30,23 +30,19 @@ spoon/
 
 ```bash
 # macOS/Linux
-uv venv .venv
 
-source .venv/bin/activate
+python -m venv spoon
 
-uv pip install -r requirements.txt
-```
+source spoon/bin/activate
 
 # Windows (PowerShell)
-```bash
-uv venv .venv
 
-.\.venv\Scripts\Activate.ps1
+python -m venv spoon
 
-uv pip install -r requirements.txt
+.\spoon\Scripts\Activate.ps1
+
+
 ```
-
-
 
 > 💡 On newer Apple Silicon Macs the `python` shim may not point to Python 3.
 > Use `python3` for all commands unless you have explicitly configured `python`
@@ -66,29 +62,34 @@ pip install -e .
 cd spoon-toolkit
 pip install -e .
 ```
+
 ---
-### Configure an OpenRouter (or other OpenAI-compatible) API key**  
-   Put the key into `.env`:
-   ```
-   OPENROUTER_API_KEY=sk-xxxx
-   ```
-   You can adjust the `llm_provider` and `model_name` in `streaming_chatbot.py`’s `ChatBot(...)`.
+
+### Configure an OpenRouter (or other OpenAI-compatible) API key\*\*
+
+Put the key into `.env`:
+
+```
+OPENROUTER_API_KEY=sk-xxxx
+```
+
+You can adjust the `llm_provider` and `model_name` in `streaming_chatbot.py`’s `ChatBot(...)`.
 
 ---
 
 ### 2. Run the Demo
+
 ```bash
 python spoon-starter/streaming_chatbot.py
 ```
+
 The script asks three generic topics in sequence. Each round prints:
 
 LLM tokens stream in real time.
 
 ---
 
-
 ### 3. Tips
+
 - **`Cleanup failed for ...`** – means a provider isn’t configured; remove it from `config.json` if unused.
 - **`websockets.legacy` DeprecationWarning** – upstream warning, safe to ignore.
-
-
