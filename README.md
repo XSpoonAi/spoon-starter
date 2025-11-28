@@ -44,10 +44,6 @@ python -m venv spoon
 
 ```
 
-> 💡 On newer Apple Silicon Macs the `python` shim may not point to Python 3.
-> Use `python3` for all commands unless you have explicitly configured `python`
-> to target Python 3.10 or later.
-
 ### 3. Install Dependencies
 
 ```bash
