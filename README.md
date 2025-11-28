@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-- Python 3.11 or higher
+- Python 3.12 or higher
 - Git
 - Virtual environment (recommended)
 
@@ -16,6 +16,13 @@
 git clone https://github.com/XSpoonAi/spoon-core.git
 
 git clone https://github.com/XSpoonAi/spoon-toolkit.git
+
+By the end, your project layout will look like this:
+```text
+spoon/
+├── spoon-core
+├── spoon-starter
+└── spoon-toolkit
 
 ```
 
@@ -51,7 +58,7 @@ uv pip install -r requirements.txt
 pip install -r requirements.txt
 ```
 
-### 4. Install as Package (Optional)
+### 4. Install as Package 
 
 ```bash
 cd spoon-core
