@@ -10,24 +10,7 @@
 
 ## Quick Installation
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/XSpoonAi/spoon-core.git
-
-git clone https://github.com/XSpoonAi/spoon-toolkit.git
-```
-By the end, your project layout will look like this:
-
-```bash
-spoon/
-├── spoon-core
-├── spoon-starter
-└── spoon-toolkit
-
-```
-
-### 2. Create Virtual Environment
+### 1. Create Virtual Environment
 
 ```bash
 # macOS/Linux
@@ -44,6 +27,14 @@ python -m venv spoon
 
 
 ```
+### 2. Clone the Repository
+
+ Install the core SDK (and optionally the toolkits package)
+
+```bash
+pip install spoon-ai-sdk      # core framework
+pip install spoon-toolkits      # extended blockchain & data toolkits
+```
 
 ### 3. Install Dependencies
 
@@ -51,18 +42,10 @@ python -m venv spoon
 pip install -r requirements.txt
 ```
 
-### 4. Install as Package 
-
-```bash
-cd spoon-core
-pip install -e .
-cd spoon-toolkit
-pip install -e .
-```
 
 ---
 
-### Configure an OpenRouter (or other OpenAI-compatible) API key\*\*
+### Configure an OpenRouter or other API key（include gemini，anthropic，deepseek，openai）\*\*
 
 Put the key into `.env`:
 
@@ -88,5 +71,5 @@ LLM tokens stream in real time.
 
 ### 3. Tips
 
-- **`Cleanup failed for ...`** – means a provider isn’t configured; remove it from `config.json` if unused.
+- **`Cleanup failed for ...`** – means a provider isn’t configured; safe to ignore.
 - **`websockets.legacy` DeprecationWarning** – upstream warning, safe to ignore.
