@@ -29,7 +29,7 @@ python -m venv spoon
 ```
 ### 2. Clone the Repository
 
- Install the core SDK (and optionally the toolkits package)
+ Install the core SDK and the toolkits package
 
 ```bash
 pip install spoon-ai-sdk      # core framework
