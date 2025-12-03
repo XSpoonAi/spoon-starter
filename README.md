@@ -27,16 +27,8 @@ python -m venv spoon
 
 
 ```
-### 2. Clone the Repository
 
- Install the core SDK and the toolkits package
-
-```bash
-pip install spoon-ai-sdk      # core framework
-pip install spoon-toolkits      # extended blockchain & data toolkits
-```
-
-### 3. Install Dependencies
+### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -45,7 +37,7 @@ pip install -r requirements.txt
 
 ---
 
-### Configure an OpenRouter or other API key（include gemini，anthropic，deepseek，openai）\*\*
+### 3.Configure an OpenRouter or other API key（include gemini，anthropic，deepseek，openai）\*\*
 
 Put the key into `.env`:
 
@@ -57,7 +49,7 @@ You can adjust the `llm_provider` and `model_name` in `streaming_chatbot.py`’s
 
 ---
 
-### 2. Run the Demo
+### 4. Run the Demo
 
 ```bash
 python spoon-starter/streaming_chatbot.py
@@ -69,7 +61,7 @@ LLM tokens stream in real time.
 
 ---
 
-### 3. Tips
+### 5. Tips
 
 - **`Cleanup failed for ...`** – means a provider isn’t configured; safe to ignore.
 - **`websockets.legacy` DeprecationWarning** – upstream warning, safe to ignore.
