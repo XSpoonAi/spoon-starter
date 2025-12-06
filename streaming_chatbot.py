@@ -17,13 +17,17 @@ Questions = [
 ]
 
 def create_chatbot() -> ChatBot:
-    return ChatBot()
+    return ChatBot(
+        llm_provider="gemini",
+        model_name="gemini-2.5-flash",
+    )
 
-async def stream_chatbot_response(question: str, timeout: float = 60.0) -> None:
+async def stream_chatbot_response(question: str) -> None:
     chatbot = create_chatbot()
     messages = [{"role": "user", "content": question}]
 
-    async for chunk in chatbot.astream(messages, timeout=timeout):
+    # Note: Gemini provider doesn't support timeout parameter in astream
+    async for chunk in chatbot.astream(messages):
         print(chunk.delta, end="", flush=True)
 
 async def main():
