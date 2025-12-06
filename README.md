@@ -10,58 +10,34 @@
 
 ## Quick Installation
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/XSpoonAi/spoon-core.git
-
-git clone https://github.com/XSpoonAi/spoon-toolkit.git
-
-```
-
-### 2. Create Virtual Environment
+### 1. Create Virtual Environment
 
 ```bash
 # macOS/Linux
-uv venv .venv
 
-source .venv/bin/activate
+python -m venv spoon
 
-uv pip install -r requirements.txt
-```
+source spoon/bin/activate
 
 # Windows (PowerShell)
 
-```bash
-uv venv .venv
+python -m venv spoon
 
-.\.venv\Scripts\Activate.ps1
+.\spoon\Scripts\Activate.ps1
 
-uv pip install -r requirements.txt
+
 ```
 
-> 💡 On newer Apple Silicon Macs the `python` shim may not point to Python 3.
-> Use `python3` for all commands unless you have explicitly configured `python`
-> to target Python 3.10 or later.
-
-### 3. Install Dependencies
+### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Install as Package (Optional)
-
-```bash
-cd spoon-core
-pip install -e .
-cd spoon-toolkit
-pip install -e .
-```
 
 ---
 
-### Configure an OpenRouter (or other OpenAI-compatible) API key\*\*
+### 3.Configure an OpenRouter or other API key（include gemini，anthropic，deepseek，openai）\*\*
 
 Put the key into `.env`:
 
@@ -73,7 +49,7 @@ You can adjust the `llm_provider` and `model_name` in `streaming_chatbot.py`’s
 
 ---
 
-### 2. Run the Demo
+### 4. Run the Demo
 
 ```bash
 python spoon-starter/streaming_chatbot.py
@@ -85,7 +61,7 @@ LLM tokens stream in real time.
 
 ---
 
-### 3. Tips
+### 5. Tips
 
-- **`Cleanup failed for ...`** – means a provider isn’t configured; remove it from `config.json` if unused.
+- **`Cleanup failed for ...`** – means a provider isn’t configured; safe to ignore.
 - **`websockets.legacy` DeprecationWarning** – upstream warning, safe to ignore.

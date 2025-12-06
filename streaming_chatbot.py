@@ -2,6 +2,7 @@
 Simple streaming ChatBot demo .
 """
 import asyncio
+import os
 from typing import Optional
 
 from dotenv import load_dotenv
@@ -10,10 +11,21 @@ from spoon_ai.chat import ChatBot
 
 load_dotenv()
 
+# Public link used in the starter tweet; override with SPOON_STARTER_DEMO_LINK if you
+# want the model to promote a specific live demo URL instead of the repo.
+STARTER_DEMO_LINK = os.getenv(
+    "SPOON_STARTER_DEMO_LINK", "https://github.com/XSpoonAi/spoon-starter"
+)
+
+SYSTEM_MESSAGE = (
+    "You are a concise assistant. Always include real URLs rather than placeholders; "
+    f"when mentioning the Spoon starter demo, use {STARTER_DEMO_LINK}."
+)
+
 Questions = [
     "Give me a concise overview of the Neo blockchain.",
     "List three real-world use cases for agentic OSes like SpoonOS.",
-    "Draft a short tweet announcing the Spoon starter demo.",
+    f"Draft a short tweet announcing the Spoon starter demo. Include this link: {STARTER_DEMO_LINK}",
 ]
 
 def create_chatbot() -> ChatBot:
