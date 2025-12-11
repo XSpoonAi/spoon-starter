@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-- Python 3.12 or higher
+- Python 3.12～3.14
 - Git
 - Virtual environment (recommended)
 
@@ -12,29 +12,44 @@
 
 ### 1. Create Virtual Environment
 
+#### Option A: Using uv (recommended)
+
 ```bash
 # macOS/Linux
-
-python -m venv spoon
-
-source spoon/bin/activate
+uv venv .venv
+source .venv/bin/activate
 
 # Windows (PowerShell)
-
-python -m venv spoon
-
-.\spoon\Scripts\Activate.ps1
-
+uv venv .venv
+.\.venv\Scripts\Activate.ps1
 
 ```
+#### Option B: Using built-in venv
+```bash
+# macOS/Linux
+python -m venv .venv
+source .venv/bin/activate
 
+# Windows (PowerShell)
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+
+```
 ### 2. Install Dependencies
 
 ```bash
-pip install -r requirements.txt
+#uv （recommend）
+uv pip install -e .
+
+#venv
+pip install -e .
 ```
-
-
+If you want to enable Mem0 support
+```bash
+uv pip install ".[memory]"
+# or
+pip install ".[memory]"
+```
 ---
 
 ### 3.Configure an OpenRouter or other API key（include gemini，anthropic，deepseek，openai）\*\*
