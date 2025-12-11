@@ -21,3 +21,8 @@ dependencies = [
 [project.urls]
 "Homepage" = "https://github.com/XSpoonAi/spoon-starter"
 "Bug Tracker" = "https://github.com/XSpoonAi/spoon-starter/issues"
+
+[project.optional-dependencies]
+memory = [
+  "spoon-ai-sdk[memory]>=0.0.1",
+]

@@ -44,8 +44,12 @@ uv pip install -e .
 #venv
 pip install -e .
 ```
-
-
+If you want to enable Mem0 support
+```bash
+uv pip install ".[memory]"
+# or
+pip install ".[memory]"
+```
 ---
 
 ### 3.Configure an OpenRouter or other API key（include gemini，anthropic，deepseek，openai）\*\*
