@@ -1,11 +1,13 @@
-""" ReAct agent demo for x402 payments."""
+""" ReAct agent demo for x402 payments (v2 compatible)."""
 import asyncio
 import os
+import sys
 import json
 from decimal import Decimal
 from typing import Any
 
 from eth_account import Account
+from rich.console import Console
 
 from spoon_ai.agents.spoon_react import SpoonReactAI
 from spoon_ai.chat import ChatBot
@@ -14,11 +16,11 @@ from spoon_ai.tools.tool_manager import ToolManager
 from spoon_ai.tools.x402_payment import X402PaywalledRequestTool
 from spoon_toolkits.web.web_scraper import WebScraperTool
 from x402.encoding import safe_base64_decode
-from dotenv import load_dotenv
 
-load_dotenv(override=True)
+# Config
 PAYWALLED_URL = os.getenv("X402_DEMO_URL", "https://www.x402.org/protected")
 PAYMENT_USDC = Decimal("0.01")
+console = Console()
 
 def setup_wallet(service: X402PaymentService) -> None:
     """Configures wallet and address, failing fast if missing."""
@@ -50,8 +52,8 @@ class X402ReactAgent(SpoonReactAI):
         self.web_scraper = WebScraperTool()
         self.available_tools = ToolManager([self.web_scraper, self.payment_tool])
         
-        # Compact prompt: Trust the agent to handle logic
         tool_desc = self._build_tool_list()
+        # Keep the strict "Probe -> Pay" flow
         self.system_prompt = (
             f"TARGET: {url}\n"
             "You are an agent executing an x402 payment demonstration. Follow this strict sequence:\n"
@@ -62,39 +64,52 @@ class X402ReactAgent(SpoonReactAI):
         )
 
 async def main():
-    print("x402 ReAct Agent Demo")
+    console.print("[bold green]x402 ReAct Agent Demo [/]")
     
-    # Initialize
     service = X402PaymentService()
-    setup_wallet(service)
-    
+    try:
+        setup_wallet(service)
+    except ValueError as e:
+        console.print(f"[bold red]Config Error:[/] {e}")
+        return
+
     agent = X402ReactAgent(service=service, url=PAYWALLED_URL, llm=ChatBot())
     
-    print(f"Payer: {service.settings.pay_to} | Target: {PAYWALLED_URL}")
-    print("Running agent...")
+    console.print(f"Payer: [bold]{service.settings.pay_to}[/] | Target: {PAYWALLED_URL}")
+    console.print("[yellow]Running agent...[/]")
 
-    await agent.run(f"Access {PAYWALLED_URL}, pay if needed, and summarise the content.")
-    
+    # Run with specific instruction
+    try:
+        await agent.run(f"Demonstrate the paywall flow for {PAYWALLED_URL}")
+    except Exception as e:
+        console.print(f"[red]Execution failed:[/] {e}")
+        return
+
     # Output Results
     messages = agent.memory.get_messages()
     last_assistant_msg = next((m for m in reversed(messages) if m.role == "assistant"), None)
     
     if last_assistant_msg:
-        print("\nAgent Result:")
-        print(last_assistant_msg.content)
+        console.print("\n[bold cyan]Agent Result:[/]")
+        console.print(last_assistant_msg.content)
 
-    # Attempt to find and print the technical receipt from the logs for verification
+    # --- 2. Enhanced Receipt Verification (Sync with original v2 support) ---
     for msg in reversed(messages):
         if msg.role == "tool" and msg.name == "x402_paywalled_request" and msg.content:
             try:
                 data = json.loads(msg.content) if isinstance(msg.content, str) else msg.content
                 if isinstance(data, dict):
-                    # Check for direct receipt or header
-                    receipt_header = (data.get("headers") or {}).get("X-PAYMENT-RESPONSE")
+                    headers = data.get("headers") or {}
+                    # Case-insensitive lookup for both v1 and v2 headers
+                    lowered_headers = {k.lower(): v for k, v in headers.items()}
+                    
+                    # Look for v2 (payment-response) OR v1 (x-payment-response)
+                    receipt_header = lowered_headers.get("payment-response") or lowered.get("x-payment-response")
+                    
                     if receipt_header:
                         receipt = X402PaymentReceipt.model_validate_json(safe_base64_decode(receipt_header))
-                        print("\nPayment Confirmed (Receipt Decoded):")
-                        print(json.dumps(receipt.model_dump(), indent=2))
+                        console.print("\n[bold green]Payment Confirmed (Receipt Decoded):[/]")
+                        console.print(json.dumps(receipt.model_dump(), indent=2))
                         break
             except Exception:
                 continue
