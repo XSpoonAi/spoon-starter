@@ -26,3 +26,6 @@ dependencies = [
 memory = [
   "spoon-ai-sdk[memory]>=0.0.1",
 ]
+
+[tool.setuptools]
+packages = []  # spoon-starter is a template project and does not contain installable packages
