@@ -16,6 +16,7 @@ authors = [
 dependencies = [
   "spoon-ai-sdk>=0.3.0",
   "spoon-toolkits>=0.2.0",
+  "pycares>=4.9,<5.0",
 ]
 
 [project.urls]
@@ -26,3 +27,6 @@ dependencies = [
 memory = [
   "spoon-ai-sdk[memory]>=0.0.1",
 ]
+
+[tool.setuptools]
+packages = []  # spoon-starter is a template project and does not contain installable packages
